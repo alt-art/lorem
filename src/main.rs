@@ -3,5 +3,5 @@ use lorem::Lorem;
 
 fn main() {
     let lorem = Lorem::new();
-    lorem.get_words(23, false);
+    println!("{}",lorem.get_phrase(3, 20));
 }

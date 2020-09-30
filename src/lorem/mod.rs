@@ -10,38 +10,71 @@ impl FirstLetterToUppperCase for String {
     fn first_to_uppper_case(self) -> String {
         let mut c = self.chars();
         match c.next() {
-        None => String::new(),
-        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+            None => String::new(),
+            Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
         }
     }
 }
 
 pub struct Lorem {
-    words: [&'static str; 503],
+    words: Vec<&'static str>,
     rng: rand::prelude::ThreadRng,
 }
 
 impl Lorem {
     pub fn new() -> Lorem {
+        let list = include_str!("../../resources/lorem-list").lines()
+        .map(|l| l)
+        .collect();
         Lorem {
-            words: ["a","ac","accommodare","accumsan","accusata","ad","adhuc","adipisci","adipiscing","adolescens","adversarium","aenean","aeque","affert","agam","alia","alienum","aliquam","aliquet","aliquid","aliquip","altera","alterum","amet","an","ancillae","animal","ante","antiopam","aperiri","appareat","appetere","aptent","arcu","assueverit","at","atomorum","atqui","auctor","audire","augue","autem","bibendum","blandit","brute","causae","cetero","ceteros","civibus","class","commodo","commune","comprehensam","conceptam","conclusionemque","condimentum","congue","consectetuer","consectetur","consequat","consetetur","constituam","constituto","consul","contentiones","conubia","convallis","convenire","corrumpit","cras","cu","cubilia","cum","curabitur","curae","cursus","dapibus","debet","decore","definiebas","definitionem","definitiones","delectus","delenit","delicata","deseruisse","deserunt","deterruisset","detracto","detraxit","diam","dicam","dicant","dicat","dicit","dico","dicta","dictas","dictum","dictumst","dicunt","dignissim","dis","discere","disputationi","dissentiunt","docendi","doctus","dolor","dolore","dolorem","dolores","dolorum","doming","donec","dui","duis","duo","ea","eam","efficiantur","efficitur","egestas","eget","ei","eirmod","eius","elaboraret","electram","eleifend","elementum","elit","elitr","eloquentiam","enim","eos","epicurei","epicuri","equidem","erat","eripuit","eros","errem","error","erroribus","eruditi","esse","est","et","etiam","eu","euismod","eum","euripidis","evertitur","ex","expetenda","expetendis","explicari","fabellas","fabulas","facilis","facilisi","facilisis","falli","fames","fastidii","faucibus","felis","fermentum","ferri","feugait","feugiat","finibus","fringilla","fugit","fuisset","fusce","gloriatur","graece","graeci","graecis","graeco","gravida","gubergren","habemus","habeo","habitant","habitasse","hac","harum","has","hendrerit","himenaeos","hinc","his","homero","honestatis","iaculis","id","idque","ignota","iisque","imperdiet","impetus","in","inani","inceptos","inciderint","indoctum","inimicus","instructior","integer","intellegat","intellegebat","interdum","interesset","interpretaris","invenire","invidunt","ipsum","iriure","iudicabit","ius","iusto","iuvaret","justo","labores","lacinia","lacus","laoreet","latine","laudem","lectus","legere","legimus","leo","liber","libero","libris","ligula","litora","lobortis","lorem","luctus","ludus","luptatum","maecenas","magna","magnis","maiestatis","maiorum","malesuada","malorum","maluisset","mandamus","massa","mattis","mauris","maximus","mazim","mea","mediocrem","mediocritatem","mei","mel","meliore","melius","menandri","mentitum","metus","mi","minim","mnesarchum","moderatius","molestiae","molestie","mollis","montes","morbi","movet","mucius","mus","mutat","nam","nascetur","natoque","natum","ne","nec","necessitatibus","neglegentur","neque","netus","nibh","nihil","nisi","nisl","no","nobis","noluisse","nominavi","non","nonumes","nonumy","noster","nostra","nostrum","novum","nulla","nullam","numquam","nunc","ocurreret","odio","offendit","omittam","omittantur","omnesque","oporteat","option","oratio","orci","ornare","ornatus","partiendo","parturient","patrioque","pellentesque","penatibus","per","percipit","pericula","periculis","perpetua","persecuti","persequeris","persius","pertinacia","pertinax","petentium","pharetra","phasellus","placerat","platea","platonem","ponderum","populo","porro","porta","porttitor","posidonium","posse","possim","possit","postea","postulant","posuere","potenti","praesent","pretium","pri","primis","principes","pro","prodesset","proin","prompta","propriae","pulvinar","purus","putent","quaeque","quaerendum","quaestio","qualisque","quam","quas","quem","qui","quidam","quis","quisque","quo","quod","quot","recteque","referrentur","reformidans","regione","reprehendunt","reprimique","repudiandae","repudiare","reque","rhoncus","ridens","ridiculus","risus","rutrum","sadipscing","saepe","sagittis","sale","salutatus","sanctus","saperet","sapien","sapientem","scelerisque","scripserit","scripta","sea","sed","sem","semper","senectus","senserit","sententiae","signiferumque","similique","simul","singulis","sit","sociis","sociosqu","sodales","solet","sollicitudin","solum","sonet","splendide","suas","suavitate","sumo","suscipiantur","suscipit","suspendisse","tacimates","taciti","tale","tamquam","tantas","tation","te","tellus","tempor","tempus","theophrastus","tibique","tincidunt","torquent","tortor","tota","tractatos","tristique","tritani","turpis","ubique","ullamcorper","ultrices","ultricies","unum","urbanitas","urna","usu","ut","utamur","utinam","utroque","varius","vehicula","vel","velit","venenatis","veniam","verear","veri","veritus","vero","verterem","vestibulum","viderer","vidisse","vim","viris","vis","vitae","vituperata","vituperatoribus","vivamus","vivendo","viverra","vix","vocent","vocibus","volumus","voluptaria","voluptatibus","voluptatum","volutpat","vulputate","wisi"],
+            words: list,
             rng: rand::thread_rng()
         }
     }
 
-    pub fn get_words(mut self, count: u32, title: bool) {
+    fn get_count(&mut self, min: u32, max: u32) -> u32 {
+        self.rng.gen_range(min, max)
+    }
+
+    pub fn get_phrase(mut self, min: u32, max: u32) -> String {
+        let count = self.get_count(min, max);
+        let mut phrase = String::new();
+        for _ in 0..count {
+            let sentences = self.get_count(2, 6);
+            for _ in 0..sentences {
+                let mut first_word = self.get_words(1, false);
+                first_word = first_word.first_to_uppper_case();
+                phrase.push_str(&first_word);
+                let quantity = self.get_count(10, 20);
+                phrase.push_str(&self.get_words(quantity, false));
+                phrase.pop();
+                phrase = phrase.trim_matches(',').to_string();
+                phrase.push_str(". ");
+            }
+            phrase.push_str("\n\n")
+        }
+        phrase
+    }
+
+    fn get_words(&mut self, count: u32, title: bool) -> String {
         let size = self.words.len();
         let mut word_count = 0;
-        let mut phrase = String::new();
+        let mut words = String::new();
         while word_count < count {
             let mut word = self.words[self.rng.gen_range(0, size)].to_string();
             if title && (word_count == 0 || word.len() > 3) {
                 word = word.first_to_uppper_case();
             }
-            phrase.push_str(&word);
-            phrase.push_str(" ");
+            words.push_str(&word);
+            let comma_chan = 20;
+            let rand = self.rng.gen_range(0,100);
+            if comma_chan >= rand && word.len() > 3 {
+                words.push_str(", ")
+            } else {
+                words.push_str(" ");
+            }
             word_count += 1;
         }
-        println!("{}", phrase);
+        words
     }
 }

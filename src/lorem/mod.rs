@@ -23,7 +23,7 @@ pub struct Lorem {
 
 impl Lorem {
     pub fn new() -> Lorem {
-        let list = include_str!("../../resources/lorem-list").lines()
+        let list = include_str!("./resources/lorem-list").lines()
         .map(|l| l)
         .collect();
         Lorem {

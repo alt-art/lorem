@@ -33,7 +33,11 @@ impl Lorem {
     }
 
     fn get_count(&mut self, min: u32, max: u32) -> u32 {
-        self.rng.gen_range(min, max)
+        if min >= max {
+            min
+        } else {
+            self.rng.gen_range(min, max)
+        }
     }
 
     pub fn get_phrase(mut self, min: u32, max: u32) -> String {

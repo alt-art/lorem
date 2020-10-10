@@ -57,7 +57,7 @@ impl Lorem {
             }
             phrase.push_str("\n\n")
         }
-        phrase
+        phrase.trim().to_string()
     }
 
     fn get_words(&mut self, count: u32, title: bool) -> String {

@@ -37,26 +37,44 @@ Author: alt-art
     <property name="can_focus">False</property>
     <property name="stock">gtk-copy</property>
   </object>
+  <object class="GtkAdjustment" id="max_adjust">
+    <property name="lower">1</property>
+    <property name="upper">200</property>
+    <property name="value">3</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="min_adjust">
+    <property name="lower">1</property>
+    <property name="upper">200</property>
+    <property name="value">2</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkApplicationWindow" id="window">
     <property name="can_focus">False</property>
-    <property name="window_position">center-always</property>
+    <property name="window_position">center</property>
     <property name="default_width">623</property>
     <property name="default_height">394</property>
-    <property name="type_hint">dialog</property>
     <child type="titlebar">
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="title" translatable="yes">Lorem</property>
-        <property name="subtitle" translatable="yes">Generator</property>
         <property name="show_close_button">True</property>
         <child>
           <object class="GtkButton" id="gen">
-            <property name="label" translatable="yes">Gerar</property>
+            <property name="label" translatable="yes" context="Gnerate">Generate</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="focus_on_click">False</property>
             <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes" context="Generate an paragraph of Lorem ipsum">Generate an paragraph of Lorem ipsum</property>
+            <child internal-child="accessible">
+              <object class="AtkObject" id="gen-atkobject">
+                <property name="AtkObject::accessible-name" translatable="yes">Generate</property>
+                <property name="AtkObject::accessible-description" translatable="yes">Generate an paragraph of Lorem ipsum</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
@@ -65,11 +83,91 @@ Author: alt-art
             <property name="can_focus">True</property>
             <property name="focus_on_click">False</property>
             <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes" context="Copy">Copy</property>
             <property name="image">copy_icon</property>
+            <child internal-child="accessible">
+              <object class="AtkObject" id="copy-atkobject">
+                <property name="AtkObject::accessible-name" translatable="yes">Copy</property>
+                <property name="AtkObject::accessible-description" translatable="yes">Copy</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="position">1</property>
           </packing>
+        </child>
+        <child type="title">
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">Min:</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="tooltip_text" translatable="yes" context="Minimum number of paragraphs">Minimum number of paragraphs</property>
+                <property name="text" translatable="yes">2</property>
+                <property name="adjustment">min_adjust</property>
+                <property name="value">2</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject">
+                    <property name="AtkObject::accessible-name" translatable="yes">Min</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Minimum number of paragraphs</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">Max:</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="tooltip_text" translatable="yes" context="Maximum number of paragraphs">Maximum number of paragraphs</property>
+                <property name="text" translatable="yes">3</property>
+                <property name="adjustment">max_adjust</property>
+                <property name="value">3</property>
+                <child internal-child="accessible">
+                  <object class="AtkObject">
+                    <property name="AtkObject::accessible-name">Max</property>
+                    <property name="AtkObject::accessible-description" translatable="yes">Maximum number of paragraphs</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
         </child>
       </object>
     </child>
@@ -89,7 +187,6 @@ Author: alt-art
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">start</property>
-                <property name="label" translatable="yes">Lorem ipsun dolor sit amet.</property>
                 <property name="wrap">True</property>
                 <property name="selectable">True</property>
                 <property name="track_visited_links">False</property>

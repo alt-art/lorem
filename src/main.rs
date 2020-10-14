@@ -7,7 +7,7 @@ use gtk::prelude::*;
 use gio::prelude::*;
 use glib::clone;
 
-use gtk::{ApplicationWindow, Builder, Label, Button, Clipboard};
+use gtk::{ApplicationWindow, Builder, Label, Button, Adjustment, Clipboard};
 
 use std::env::args;
 
@@ -26,9 +26,11 @@ fn build_ui(application: &gtk::Application) {
 
     let window: ApplicationWindow = builder.get_object("window").expect("Cound't get ApplicationWindow");
     let label: Label = builder.get_object("label").expect("Cound't get Label");
+    let min_adjustment: Adjustment = builder.get_object("min_adjust").expect("Cound't get Adjustment");
+    let max_adjustment: Adjustment = builder.get_object("max_adjust").expect("Cound't get Adjustment");
     let gen_button: Button = builder.get_object("gen").expect("Cound't get Button");
     gen_button.connect_clicked(clone!(@weak label => move |_| {
-        generate(label, 2, 3);
+        generate(label, min_adjustment.get_value() as u32, max_adjustment.get_value() as u32);
     }));
     let copy_button: Button = builder.get_object("copy").expect("Cound't get Button");
     copy_button.connect_clicked(clone!(@weak label => move |_| {

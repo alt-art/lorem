@@ -37,14 +37,14 @@ Author: alt-art
     <property name="can_focus">False</property>
     <property name="stock">gtk-copy</property>
   </object>
-  <object class="GtkAdjustment" id="max_ajust">
+  <object class="GtkAdjustment" id="max_adjust">
     <property name="lower">1</property>
     <property name="upper">200</property>
     <property name="value">3</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="min_ajust">
+  <object class="GtkAdjustment" id="min_adjust">
     <property name="lower">1</property>
     <property name="upper">200</property>
     <property name="value">2</property>
@@ -56,6 +56,7 @@ Author: alt-art
     <property name="window_position">center</property>
     <property name="default_width">623</property>
     <property name="default_height">394</property>
+    <property name="icon_name">lorem</property>
     <child type="titlebar">
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
@@ -87,8 +88,8 @@ Author: alt-art
             <property name="image">copy_icon</property>
             <child internal-child="accessible">
               <object class="AtkObject" id="copy-atkobject">
-                <property name="AtkObject::accessible-name" translatable="yes" context="Copy">Copy</property>
-                <property name="AtkObject::accessible-description" translatable="yes" context="Copy">Copy</property>
+                <property name="AtkObject::accessible-name" translatable="yes">Copy</property>
+                <property name="AtkObject::accessible-description" translatable="yes">Copy</property>
               </object>
             </child>
           </object>
@@ -119,7 +120,7 @@ Author: alt-art
                 <property name="can_focus">True</property>
                 <property name="tooltip_text" translatable="yes" context="Minimum number of paragraphs">Minimum number of paragraphs</property>
                 <property name="text" translatable="yes">2</property>
-                <property name="adjustment">min_ajust</property>
+                <property name="adjustment">min_adjust</property>
                 <property name="value">2</property>
                 <child internal-child="accessible">
                   <object class="AtkObject">
@@ -152,7 +153,7 @@ Author: alt-art
                 <property name="can_focus">True</property>
                 <property name="tooltip_text" translatable="yes" context="Maximum number of paragraphs">Maximum number of paragraphs</property>
                 <property name="text" translatable="yes">3</property>
-                <property name="adjustment">max_ajust</property>
+                <property name="adjustment">max_adjust</property>
                 <property name="value">3</property>
                 <child internal-child="accessible">
                   <object class="AtkObject">

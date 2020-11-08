@@ -56,6 +56,7 @@ Author: alt-art
     <property name="window_position">center</property>
     <property name="default_width">623</property>
     <property name="default_height">394</property>
+    <property name="icon_name">lorem</property>
     <child type="titlebar">
       <object class="GtkHeaderBar">
         <property name="visible">True</property>

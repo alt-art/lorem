@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Lorem
+Comment=A Lorem Ipsum generator
+Exec=lorem
+Icon=lorem
+Terminal=false

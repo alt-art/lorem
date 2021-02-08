@@ -1,6 +1,7 @@
 extern crate rand;
 
 use rand::Rng;
+use rand::distributions::{Distribution, Uniform};
 
 trait FirstLetterToUppperCase {
     fn first_to_uppper_case(self) -> String;
@@ -18,7 +19,6 @@ impl FirstLetterToUppperCase for String {
 
 pub struct Lorem {
     words: Vec<&'static str>,
-    rng: rand::prelude::ThreadRng,
 }
 
 impl Lorem {
@@ -28,29 +28,26 @@ impl Lorem {
         .collect();
         Lorem {
             words: list,
-            rng: rand::thread_rng()
         }
     }
 
-    fn get_count(&mut self, min: u32, max: u32) -> u32 {
-        if min >= max {
-            min
+    pub fn get_phrase(self, min: u32, max: u32) -> String {
+        let mut rng = rand::thread_rng();
+        let count:u32;
+        if  min >= max {
+            count = min;
         } else {
-            self.rng.gen_range(min, max)
+            count = rng.gen_range(min..max);
         }
-    }
-
-    pub fn get_phrase(mut self, min: u32, max: u32) -> String {
-        let count = self.get_count(min, max);
+        let sentences = Uniform::from(2..6);
+        let quantity = Uniform::from(10..20);
         let mut phrase = String::new();
         for _ in 0..count {
-            let sentences = self.get_count(2, 6);
-            for _ in 0..sentences {
-                let mut first_word = self.get_words(1, false);
+            for _ in 0..sentences.sample(&mut rng) {
+                let mut first_word = self.get_words(1);
                 first_word = first_word.first_to_uppper_case();
                 phrase.push_str(&first_word);
-                let quantity = self.get_count(10, 20);
-                phrase.push_str(&self.get_words(quantity, false));
+                phrase.push_str(&self.get_words(quantity.sample(&mut rng)));
                 phrase.pop();
                 phrase = phrase.trim_matches(',').to_string();
                 phrase.push_str(". ");
@@ -60,19 +57,16 @@ impl Lorem {
         phrase.trim().to_string()
     }
 
-    fn get_words(&mut self, count: u32, title: bool) -> String {
+    fn get_words(&self, count: u32) -> String {
+        let mut rng = rand::thread_rng();
         let size = self.words.len();
+        let words_range = Uniform::from(0..size);
         let mut word_count = 0;
         let mut words = String::new();
         while word_count < count {
-            let mut word = self.words[self.rng.gen_range(0, size)].to_string();
-            if title && (word_count == 0 || word.len() > 3) {
-                word = word.first_to_uppper_case();
-            }
+            let word = &self.words[words_range.sample(&mut rng)].to_string();
             words.push_str(&word);
-            let comma_chan = 20;
-            let rand = self.rng.gen_range(0,100);
-            if comma_chan >= rand && word.len() > 3 {
+            if rng.gen_ratio(20,100) && word.len() > 3 {
                 words.push_str(", ")
             } else {
                 words.push_str(" ");

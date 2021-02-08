@@ -1,3 +1,10 @@
+lorem (0.1.1) stable; urgency=low
+
+  * Update dependecies.
+  * Generation optimization
+
+  -- Pedro Mendes <pedromendescraft@gmail.com>  Mon, 08 Feb 2021 20:13:16 -0300
+
 lorem (0.1.0) stable; urgency=low
 
   * Initial release.

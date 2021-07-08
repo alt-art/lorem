@@ -66,7 +66,7 @@ impl Lorem {
         while word_count < count {
             let word = &self.words[words_range.sample(&mut rng)].to_string();
             words.push_str(&word);
-            if rng.gen_ratio(20,100) && word.len() > 3 {
+            if rng.gen_ratio(1,10) && word.len() > 3 {
                 words.push_str(", ")
             } else {
                 words.push_str(" ");

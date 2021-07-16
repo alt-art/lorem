@@ -97,7 +97,7 @@ Author: alt-art
             <property name="position">1</property>
           </packing>
         </child>
-        <child type="title">
+        <child>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -169,6 +169,27 @@ Author: alt-art
               </packing>
             </child>
           </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="output_type">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="active">1</property>
+            <property name="active_id">1</property>
+            <items>
+              <item id="0" translatable="yes">HTML</item>
+              <item id="1" translatable="yes">Text</item>
+            </items>
+          </object>
+          <packing>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child type="title">
+          <placeholder/>
         </child>
       </object>
     </child>

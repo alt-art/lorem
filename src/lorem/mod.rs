@@ -31,7 +31,7 @@ impl Lorem {
         }
     }
 
-    pub fn get_phrase(self, min: u32, max: u32) -> String {
+    pub fn get_phrase(self, min: u32, max: u32, output_type: &str) -> String {
         let mut rng = rand::thread_rng();
         let count:u32;
         if  min >= max {
@@ -43,6 +43,9 @@ impl Lorem {
         let quantity = Uniform::from(10..20);
         let mut phrase = String::new();
         for _ in 0..count {
+            if output_type == "HTML" {   
+                phrase.push_str("<p>");
+            }
             for _ in 0..sentences.sample(&mut rng) {
                 let mut first_word = self.get_words(1);
                 first_word = first_word.first_to_uppper_case();
@@ -51,6 +54,10 @@ impl Lorem {
                 phrase.pop();
                 phrase = phrase.trim_matches(',').to_string();
                 phrase.push_str(". ");
+            }
+            if output_type == "HTML" {
+                phrase.pop();
+                phrase.push_str("</p>");
             }
             phrase.push_str("\n\n")
         }

@@ -1,7 +1,7 @@
 [package]
 name = "lorem"
-description = "Lorem Ipsun generator"
-version = "0.1.1"
+description = "Lorem Ipsum generator"
+version = "0.2.0"
 authors = ["alt-art <pedromendescraft@gmail.com>"]
 repository="https://github.com/alt-art/lorem"
 license = "GPL-3.0-or-later"
@@ -15,7 +15,6 @@ rand = "0.8.4"
 glib = "0.14.2"
 gtk = "0.14.0"
 gdk = "0.14.0"
-gio = "0.14.0"
 
 [package.metadata.deb]
 maintainer = "Pedro Mendes <pedromendescraft@gmail.com>"

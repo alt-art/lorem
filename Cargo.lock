@@ -392,7 +392,6 @@ name = "lorem"
 version = "0.2.0"
 dependencies = [
  "gdk",
- "gio",
  "glib",
  "gtk",
  "rand",
